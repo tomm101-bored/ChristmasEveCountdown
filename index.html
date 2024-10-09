@@ -8,11 +8,27 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: #ff0000;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+        }
+
+        img {
+            width: 100px;
+            height: auto;
+            margin: 0 20px; 
+        }
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 {
@@ -31,8 +47,16 @@
 </head>
 <body>
 
-    <h1>Christmas is soon!</h1>
-    <div id="countdown">Loading...</div>
+    <div class="container">
+        <img src="https://cdn.discordapp.com/attachments/1251592602289963159/1293636406270234707/karacsonyi-koszoru-ajtora-piros-arany-35-cm-removebg-preview.png?ex=67081849&is=6706c6c9&hm=0d7dd5534adee3f91c973a88275452794eff31831bfc010dd4bb9915de2ad5ee&" alt="Left Image">
+
+        <div class="text">
+            <h1>Christmas is soon!</h1>
+            <div id="countdown">Loading...</div>
+        </div>
+
+        <img src="https://cdn.discordapp.com/attachments/1251592602289963159/1293636406270234707/karacsonyi-koszoru-ajtora-piros-arany-35-cm-removebg-preview.png?ex=67081849&is=6706c6c9&hm=0d7dd5534adee3f91c973a88275452794eff31831bfc010dd4bb9915de2ad5ee&" alt="Right Image">
+    </div>
 
     <script>
         function startCountdown() {
@@ -41,30 +65,26 @@
             function updateCountdown() {
                 const now = new Date();
                 const currentYear = now.getFullYear();
-                const christmasEve = new Date(currentYear, 11, 24); // Month is 0-indexed, so 11 is December
+                const christmasEve = new Date(currentYear, 11, 24);
 
                 if (now > christmasEve) {
-                    // If it's past Christmas Eve, countdown for next year
                     christmasEve.setFullYear(currentYear + 1);
                 }
 
                 const difference = christmasEve - now;
 
-                // Calculate time remaining
                 const days = Math.floor(difference / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-                countdownElement.textContent = `${days} Days:${hours} Hours:${minutes} Minutes:${seconds} Seconds`;
+                countdownElement.textContent = `${days} Days: ${hours} Hours: ${minutes} Minutes: ${seconds} Seconds`;
 
-                // Reset the countdown when it reaches 0
                 if (difference <= 0) {
                     startCountdown();
                 }
             }
 
-            // Update every second
             setInterval(updateCountdown, 1000);
         }
 
